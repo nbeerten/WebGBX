@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6ced596c6b9da4ca4b8a869dea8fe6d",
+    "content-hash": "b4d6d82b6810f5cf960b5b001715c9a4",
     "packages": [
         {
             "name": "brick/math",
@@ -1726,60 +1726,6 @@
                 "source": "https://github.com/manialib/formatting/tree/4.1.3"
             },
             "time": "2021-09-01T07:18:08+00:00"
-        },
-        {
-            "name": "manialib/gbx",
-            "version": "4.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/manialib/gbx.git",
-                "reference": "dcc75443212f40dbab17a9b1ac93f39d8812e19d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/manialib/gbx/zipball/dcc75443212f40dbab17a9b1ac93f39d8812e19d",
-                "reference": "dcc75443212f40dbab17a9b1ac93f39d8812e19d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "php": "^7.1 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Manialib\\": "src/Manialib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nadeo",
-                    "email": "contact@nadeo.com",
-                    "homepage": "http://www.nadeo.com/"
-                }
-            ],
-            "description": "Manialib/Gbx is a PHP package to manipulate Maniaplanet Gbx files metadata",
-            "homepage": "https://github.com/manialib/gbx",
-            "keywords": [
-                "ManiaLib",
-                "ManiaPlanet",
-                "Nadeo",
-                "ShootMania",
-                "TrackMania",
-                "Ubisoft"
-            ],
-            "support": {
-                "issues": "https://github.com/manialib/gbx/issues",
-                "source": "https://github.com/manialib/gbx/tree/4.1.2"
-            },
-            "time": "2021-09-01T07:17:53+00:00"
         },
         {
             "name": "monolog/monolog",

@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+// Added
+use Illuminate\Support\Facades\Http;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Macro for interacting with trackmania.io API
+        Http::macro('tmio', function () {
+            return Http::withHeaders([
+                'User-Agent' => config('webgbx.useragent'),
+            ])->baseUrl('https://trackmania.io/api');
+        });
     }
 }

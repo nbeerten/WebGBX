@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\parseGBX_old;
 use App\Http\Controllers\parseGBX;
 
 /*
@@ -18,4 +19,7 @@ Route::get('/', function () {
     return view('input');
 });
 
-Route::get('/gbx', [parseGBX::class, 'index']);
+Route::get('/gbx_old', [parseGBX_old::class, 'index']);
+Route::get('/tmio', [parseGBX_old::class, 'tmiotest']);
+
+Route::get('/gbx', parseGBX::class);
