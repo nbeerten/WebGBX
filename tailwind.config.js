@@ -9,6 +9,13 @@ module.exports = {
     ],
   theme: {
     extend: {},
-  },
+    fontFamily: {
+        'sans': ['Montserrat', 'ui-sans-serif', 'system-ui'],
+        'serif': ['ui-serif', 'Georgia'],
+        'mono': ['"Ubuntu Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        'display': ['Ubuntu', 'system-ui'],
+        'body': ['Montserrat', 'system-ui'],
+    },
   plugins: [],
+}
 }

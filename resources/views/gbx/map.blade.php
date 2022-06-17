@@ -7,10 +7,12 @@
     <title>WebGBX</title>
 </head>
 <body>
-    <h1>{{ $map_name }}</h1>
-    <p>{{ $map_authorTime }}</p>
-    <p>{{ $map_authorlogin }}</p>
-    <p>{{ $map_authorname }}</p>
-    <p>{{ $map_authorzone }}</p>
+    <h1>{{ $map['name'] }}</h1>
+    <p>{{ $map['authorName'] }}</p>
+    <p>{{ $map['authorZone'] }}</p>
+    <p>{{ $map['authorTime'] }}</p>
+    <p>{{ $map['displayCost'] }}</p>
+    <p>{{ $map['uid'] }}</p>
+    <p>{{ $map['validated'] }}</p>
 </body>
 </html>

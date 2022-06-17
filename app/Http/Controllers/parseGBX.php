@@ -24,12 +24,12 @@ class parseGBX extends Controller
         $map = Map::loadFile($_SERVER['DOCUMENT_ROOT'].'/Ubiquitous.Map.Gbx');
         $name_clean = new ManiaplanetString($map->getName());
         $name_clean = $name_clean->stripAll()->__toString();
+
+        $zone = explode("|", $map->getc8_authorZone());
+        $zone = $zone[2];
         $mapinfo = [
-            "name" => $map->getName(),
-            "name_clean" => $name_clean,
+            "name" => $name_clean,
             "uid" => $map->getUid(),
-            "authorZone" => $map->getAuthorZone(),
-            "author" => $map->getAuthor(),
             "validated" => $map->isValidated(),
             "nblaps" => $map->getNbLaps(),
             "mod" => $map->getMod(),
@@ -38,17 +38,16 @@ class parseGBX extends Controller
             "goldMedal" => $map->getGoldMedal(),
             "silverMedal" => $map->getSilverMedal(),
             "bronzeMedal" => $map->getBronzeMedal(),
-            "c8_authorLogin" => $map->getc8_authorLogin(),
-            "c8_authorName" => $map->getc8_authorName(),
-            "c8_authorZone" => $map->getc8_authorZone()
+            "authorLogin" => $map->getc8_authorLogin(),
+            "authorName" => $map->getc8_authorName(),
+            "authorZone" => $zone
         ];
 
-        return view('gbx.map')
-                    ->with('map_name', $mapinfo['name_clean'])
-                    ->with('map_author', $mapinfo['author'])
-                    ->with('map_authorTime', $mapinfo['authorTime'])
-                    ->with('map_authorlogin', $mapinfo['c8_authorLogin'])
-                    ->with('map_authorname', $mapinfo['c8_authorName'])
-                    ->with('map_authorzone', $mapinfo['c8_authorZone']);
+        $map->getThumbnail()->saveJpg('thumbnails/' . $mapinfo['uid'] . '.jpg');
+        $thumbnail = 'thumbnails/' . $mapinfo['uid'] . '.jpg';
+
+        return view('gbx.map2')
+                    ->with('map', $mapinfo)
+                    ->with('thumbnail', $thumbnail);
     }
 }
