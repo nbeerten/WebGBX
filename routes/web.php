@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\parseGBX_old;
 use App\Http\Controllers\parseGBX;
+use App\Http\Controllers\getThumbnail;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::get('/gbx_old', [parseGBX_old::class, 'index']);
 Route::get('/tmio', [parseGBX_old::class, 'tmiotest']);
 
 Route::get('/gbx', parseGBX::class);
+Route::get('/gbx/thumbnail/{id}', [getThumbnail::class, 'get']);

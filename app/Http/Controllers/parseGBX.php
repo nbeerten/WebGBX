@@ -10,6 +10,7 @@ use Manialib\Formatting\ManiaplanetString;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use App\Classes\MedalTime\MedalTime;
+use App\Classes\OnlineMapServices\OnlineMapServices;
 
 
 class parseGBX extends Controller
@@ -23,7 +24,7 @@ class parseGBX extends Controller
     public function __invoke(Request $request)
     {
         // Load map file and put data into arrray
-        $map = Map::loadFile($_SERVER['DOCUMENT_ROOT'].'/Ubiquitous.Map.Gbx');
+        $map = Map::loadFile($_SERVER['DOCUMENT_ROOT']."/Ubiquitous.Map.Gbx");
         $nameString = new ManiaplanetString($map->getName());
         $nameStyled = $nameString->stripLinks()->stripEscapeCharacters()->toHtml();
         $nameClean = $nameString->stripAll()->__toString();
@@ -53,12 +54,17 @@ class parseGBX extends Controller
             "authorZone" => $zone
         ];
 
+        $OnlineMapServices = new OnlineMapServices($mapinfo['uid']);
+        $OnlineMapServices = $OnlineMapServices->get();
         
-        $map->getThumbnail()->saveJpg('thumbnails/' . $mapinfo['uid'] . '.jpg');
-        $thumbnail = 'thumbnails/' . $mapinfo['uid'] . '.jpg';
+        $thumbnail = $map->getThumbnail()->__toString();
+        Cache::put('thumbnail/'.$mapinfo['uid'], $thumbnail, $seconds = 60);
+        
+        $thumbnail = 'gbx/thumbnail/' . $mapinfo['uid'];
 
         return view('gbx.map')
                     ->with('map', $mapinfo)
-                    ->with('thumbnail', $thumbnail);
+                    ->with('thumbnail', $thumbnail)
+                    ->with('OnlineMapServices', $OnlineMapServices);
     }
 }
