@@ -9,6 +9,8 @@ use App\Classes\GBXParser\Map;
 use Manialib\Formatting\ManiaplanetString;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use App\Classes\MedalTime\MedalTime;
+
 
 class parseGBX extends Controller
 {
@@ -22,31 +24,40 @@ class parseGBX extends Controller
     {
         // Load map file and put data into arrray
         $map = Map::loadFile($_SERVER['DOCUMENT_ROOT'].'/Ubiquitous.Map.Gbx');
-        $name_clean = new ManiaplanetString($map->getName());
-        $name_clean = $name_clean->stripAll()->__toString();
+        $nameString = new ManiaplanetString($map->getName());
+        $nameStyled = $nameString->stripLinks()->stripEscapeCharacters()->toHtml();
+        $nameClean = $nameString->stripAll()->__toString();
 
         $zone = explode("|", $map->getc8_authorZone());
-        $zone = $zone[2];
+        $zone = implode(", ", array_reverse($zone));
+
+        function msToFormattedString($ms) {
+            $medaltime = new Medaltime($ms);
+            return $medaltime->__toString();
+        }
+
         $mapinfo = [
-            "name" => $name_clean,
+            "name" => $nameClean,
+            "nameStyled" => $nameStyled,
             "uid" => $map->getUid(),
             "validated" => $map->isValidated(),
             "nblaps" => $map->getNbLaps(),
             "mod" => $map->getMod(),
             "displayCost" => $map->getDisplayCost(),
-            "authorTime" => $map->getAuthorTime(),
-            "goldMedal" => $map->getGoldMedal(),
-            "silverMedal" => $map->getSilverMedal(),
-            "bronzeMedal" => $map->getBronzeMedal(),
+            "authorTime" => msToFormattedString($map->getAuthorTime()),
+            "goldMedal" => msToFormattedString($map->getGoldMedal()),
+            "silverMedal" => msToFormattedString($map->getSilverMedal()),
+            "bronzeMedal" => msToFormattedString($map->getBronzeMedal()),
             "authorLogin" => $map->getc8_authorLogin(),
             "authorName" => $map->getc8_authorName(),
             "authorZone" => $zone
         ];
 
+        
         $map->getThumbnail()->saveJpg('thumbnails/' . $mapinfo['uid'] . '.jpg');
         $thumbnail = 'thumbnails/' . $mapinfo['uid'] . '.jpg';
 
-        return view('gbx.map2')
+        return view('gbx.map')
                     ->with('map', $mapinfo)
                     ->with('thumbnail', $thumbnail);
     }

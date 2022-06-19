@@ -1,0 +1,31 @@
+{
+    "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+    "name": "WebGBX",
+    "short_name": "WebGBX",
+    "start_url": ".",
+    "display": "browser",
+    "display_mode": "browser",
+    "background_color": "#fff",
+    "description": "A readable Hacker News app.",
+    "icons": [{
+        "src": "gbx-icon.png",
+        "sizes": "144x144",
+        "type": "image/png"
+    }],
+    "file_handlers": [
+        {
+          "action": "/open",
+          "name": "GBX",
+          "accept": {
+            "application/octet-stream": ".Gbx"
+          },
+          "icons": [
+            {
+              "src": "/gbx-icon.png",
+              "sizes": "144x144"
+            }
+          ],
+          "launch_type": "multiple-clients"
+        }
+      ]
+  }
