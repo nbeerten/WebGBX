@@ -34,6 +34,12 @@ class OnlineMapServices
         return;
     }
 
+    public function delete()
+    {
+        Cache::forget('tmio/'.$this->uid); 
+        return;
+    }
+
     protected function tmio() 
     {
         $tmio = Cache::get('tmio/'.$this->uid, 
@@ -44,11 +50,7 @@ class OnlineMapServices
                 if($api['mapUid'] === $uid) {
                     Cache::put('tmio/'.$uid, $api->body(), $seconds = 2592000);
                     $response = $api->body();
-                } else {
-                    $response = null;
                 }
-            } else {
-                $response = null;
             }
             return $response;
         });
