@@ -24,7 +24,7 @@ class parseGBX extends Controller
     public function __invoke(Request $request)
     {
         // Load map file and put data into arrray
-        $map = Map::loadFile($_SERVER['DOCUMENT_ROOT']."/Ubiquitous.Map.Gbx");
+        $map = Map::loadString($request->file('map')->get());
         $nameString = new ManiaplanetString($map->getName());
         $nameStyled = $nameString->stripLinks()->stripEscapeCharacters()->toHtml();
         $nameClean = $nameString->stripAll()->__toString();
@@ -55,16 +55,14 @@ class parseGBX extends Controller
         ];
 
         $OnlineMapServices = new OnlineMapServices($mapinfo['uid']);
-        $OnlineMapServices = $OnlineMapServices->get();
+        $OnlineMapServices->store();
         
-        $thumbnail = $map->getThumbnail()->__toString();
-        Cache::put('thumbnail/'.$mapinfo['uid'], $thumbnail, $seconds = 60);
-        
-        $thumbnail = 'gbx/thumbnail/' . $mapinfo['uid'];
+        $thumbnailfile = $map->getThumbnail()->__toString();
 
-        return view('gbx.map')
-                    ->with('map', $mapinfo)
-                    ->with('thumbnail', $thumbnail)
-                    ->with('OnlineMapServices', $OnlineMapServices);
+        // Chaching!!!!
+        Cache::put('mapinfo/'.$mapinfo['uid'], json_encode($mapinfo), $seconds = 60*30);
+        Cache::put('thumbnail/'.$mapinfo['uid'], $thumbnailfile, $seconds = 60*30);
+
+        return redirect()->route('gbxid', ['id' => $mapinfo['uid']]);
     }
 }

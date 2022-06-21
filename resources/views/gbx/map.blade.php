@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('title', $map['name'])
+@section('map_name', $map['name'])
+@section('map_uid', $map['uid'])
 
 @section('content')
 <div class="md:flex gap-4 py-8">

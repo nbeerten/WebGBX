@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\parseGBX_old;
 use App\Http\Controllers\parseGBX;
 use App\Http\Controllers\getThumbnail;
+use App\Http\Controllers\getMapByID;
+use App\Http\Controllers\deleteMapByID;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +19,16 @@ use App\Http\Controllers\getThumbnail;
 */
 
 Route::get('/', function () {
-    return view('input');
+    return view('home');
 })  ->name('home');
 
-Route::get('/gbx_old', [parseGBX_old::class, 'index']);
-
-Route::get('/gbx', parseGBX::class)
+Route::post('/gbx', parseGBX::class)
     ->name('gbx');
+
+Route::get('/gbx/{id}', [getMapByID::class, 'get'])
+    ->name('gbxid');
+
+Route::get('/gbx/{id}/delete', deleteMapByID::class)
+    ->name('gbxiddelete');
+
 Route::get('/gbx/thumbnail/{id}', [getThumbnail::class, 'get']);

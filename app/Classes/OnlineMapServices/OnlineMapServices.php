@@ -28,6 +28,12 @@ class OnlineMapServices
         return (array) $response;
     }
 
+    public function store()
+    {
+        $this->tmio();
+        return;
+    }
+
     protected function tmio() 
     {
         $tmio = Cache::get('tmio/'.$this->uid, 

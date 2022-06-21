@@ -11,7 +11,7 @@ class getThumbnail extends Controller
 {
     public function get($id)
     {
-        $thumbnail = Cache::pull('thumbnail/'.$id);
+        $thumbnail = Cache::get('thumbnail/'.$id);
 
         if($thumbnail !== null) {
             return response($thumbnail)->header('Content-Type', 'image/jpg');
