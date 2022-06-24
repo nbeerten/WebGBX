@@ -3,15 +3,8 @@
 namespace App\Classes\MedalTime;
 
 class MedalTime 
-{
-    protected $ms;
-    protected $string;
-
-    function __construct($ms) {
-        $this->ms = intval($ms);
-    }
-     
-    public function format($ms_in){
+{     
+    public static function format($ms_in){
         $ms = $ms_in % 1000;
         $s = ($ms_in / 1000) % 60;
         $m = ($ms_in / (60*1000)) % 60;
@@ -23,12 +16,6 @@ class MedalTime
             $string = sprintf("%01d:%02d.%03d", $m, $s, $ms);
         }
 
-        $this->string = $string;
         return $string;
-    }
-    
-    public function __toString() {
-        $this->format($this->ms);
-        return $this->string;
     }
 }

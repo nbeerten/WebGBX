@@ -19,7 +19,15 @@ class deleteMapByID extends Controller
     {
         Cache::forget('mapinfo/'.$id);
         Cache::forget('thumbnail/'.$id);
+        $request->session()->forget(['mapinfo.' . $id, 'mapthumbnail.' . $id]);
+        $openmaps = $request->session()->get('user.openmaps'); // Second argument is a default value
+        foreach ($openmaps as $key => $val) {
+            if ($val['uid'] === $id) {
+                unset($openmaps[$key]);
+            }
+        }
+        $request->session()->put('user.openmaps', $openmaps);
 
-        return redirect()->route('home');;
+        return redirect()->route('home');
     }
 }

@@ -25,6 +25,7 @@
 
     <title>@yield('title') - WebGBX</title>
     <script src="/js/app.js" type="application/javascript"></script>
+    @livewireStyles
 </head>
 <body class="bg-neutral-900 text-white">
     <header>
@@ -42,6 +43,7 @@
         @section('content')
         @show
     </main>
+    @livewireScripts
 </body>
 
 </html>

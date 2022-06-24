@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Cache;
 
 class getThumbnail extends Controller
 {
-    public function get($id)
+    public function get(Request $request, $id)
     {
-        $thumbnail = Cache::get('thumbnail/'.$id);
+        $thumbnail =  $request->session()->get('mapthumbnail.' . $id);
+        
 
         if($thumbnail !== null) {
             return response($thumbnail)->header('Content-Type', 'image/jpg');
