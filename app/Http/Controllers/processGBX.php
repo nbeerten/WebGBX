@@ -12,8 +12,11 @@ class processGBX extends Controller
 {
     public function upload(Request $request)
     {
-        $map = new MapInfo($request->file('map')->get());
-
+        try {
+            $map = new MapInfo($request->file('map')->get());
+        } catch (\Exception $e) {
+            abort(400, "Map wasn't able to be parsed: " . $e->getMessage());
+        }
         /* The collect function turns the array into a collection (string thing in laravel that is able to be stored in session) */
         $mapinfo = collect($map->format());
         $map->thumbnail();

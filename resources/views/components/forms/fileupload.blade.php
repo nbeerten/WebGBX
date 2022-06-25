@@ -2,10 +2,9 @@
     @csrf
     <label class="w-full" for="fileinput">
         <div class="grid grid-cols-[auto_1fr] gap-5 w-full py-2 px-4 rounded-md border-0 text-xl font-semibold bg-neutral-800 text-white hover:bg-neutral-700">
-            @error('map')
-                <div class="bg-red-600 py-1 px-3">{{ $message }}</div>
-            @enderror
-            <div class="bg-white h-16 w-16" style="-webkit-mask: url('/assets/file-import-solid.svg') no-repeat center; mask: url('/assets/file-import-solid.svg') no-repeat center;"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
             <div class="flex flex-col h-full justify-center">
                 <h3>Choose map file</h3>
                 <div class="flex justify-center">

@@ -19,8 +19,12 @@ class MapInfo
     function __construct($file)
     {
         /* File = $request->file('map')->get() */
-        $this->file = $file;
-        $this->map  = $this->parse();
+        try {
+            $this->file = $file;
+            $this->map  = $this->parse();
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
         return;
     }
 

@@ -28,6 +28,11 @@ Route::get('/', function () {
 Route::post('/gbx', [processGBX::class, 'upload'])
     ->name('gbx');
 
+Route::get('/gbx', function() {
+        return redirect('/');
+    })
+    ->name('gbx');
+
 Route::get('/gbx/{id}', [viewGBX::class, 'view'])
     ->name('gbxid');
 

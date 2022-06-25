@@ -1,6 +1,6 @@
 <nav
 class="bg-zinc-900/50 backdrop-blur fixed z-50 top-0 left-0 right-0 w-full border-b border-zinc-500 shadow-2xl shadow-black/80">
-<div class="max-w-7xl mx-auto px-2 lg:px-8">
+<div class="max-w-7xl mx-auto pl-4 lg:pl-8">
     <div class="flex items-center justify-center sm:justify-start h-16">
         <div class="flex-shrink-0 flex items-center">
             <img class="block h-8 w-auto border border-zinc-700 rounded-full shadow-md shadow-black/80" src="/assets/logo_plain.svg" alt="WebGBX">
