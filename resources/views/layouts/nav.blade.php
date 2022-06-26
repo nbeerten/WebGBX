@@ -17,7 +17,7 @@ class="bg-zinc-900/50 backdrop-blur fixed z-50 top-0 left-0 right-0 w-full borde
                 'px-3 py-2 rounded-md text-sm font-medium shrink-0',
                 'bg-neutral-900 text-white' => $homeactive,
                 'text-neutral-300 hover:bg-neutral-700 hover:text-white ' => ! $homeactive
-            ])>Home</a>
+            ])>Homepage</a>
             
             @livewire('nav.openmaps', ['current' => Request::route()->parameter('id')])
         </div>
