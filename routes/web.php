@@ -23,14 +23,14 @@ use App\Http\Controllers\deleteMapByID;
 
 Route::get('/', function () {
     return view('home');
-})  ->name('home');
+})->name('home');
 
 Route::post('/gbx', [processGBX::class, 'upload'])
     ->name('gbx');
 
-Route::get('/gbx', function() {
-        return redirect('/');
-    })
+Route::get('/gbx', function () {
+    return redirect('/');
+})
     ->name('gbx');
 
 Route::get('/gbx/{id}', [viewGBX::class, 'view'])
@@ -42,6 +42,6 @@ Route::get('/gbx/{id}/delete', deleteMapByID::class)
 Route::get('/gbx/thumbnail/{id}', [getThumbnail::class, 'get'])
     ->name('gbxthumbnail');
 
-Route::any('/flush', function() {
+Route::any('/flush', function () {
     Request::session()->flush();
 });

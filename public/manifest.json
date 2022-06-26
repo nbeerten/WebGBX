@@ -2,8 +2,8 @@
     "name": "WebGBX",
     "short_name": "WebGBX",
     "start_url": "/",
-    "display": "minimal-ui",
-    "display_mode": "minimal-ui",
+    "display": "browser",
+    "display_mode": "browser",
     "theme_color": "#000000",
     "background_color": "#000000",
     "description": "Web-based GBX parser.",
@@ -18,27 +18,27 @@
             "sizes": "512x512",
             "type": "image/png"
         }
-    ],
-    "file_handlers": [
-        {
-            "action": "/open",
-            "name": "GBX",
-            "accept": {
-                "application/octet-stream": ".Gbx"
-            },
-            "icons": [
-                {
-                    "src": "/ico/icon-192x192.png",
-                    "sizes": "192x192",
-                    "type": "image/png"
-                },
-                {
-                    "src": "/ico/icon-512x512.png",
-                    "sizes": "512x512",
-                    "type": "image/png"
-                }
-            ],
-            "launch_type": "multiple-clients"
-        }
     ]
+    // "file_handlers": [
+    //     {
+    //         "action": "/open",
+    //         "name": "GBX",
+    //         "accept": {
+    //             "application/octet-stream": ".Gbx"
+    //         },
+    //         "icons": [
+    //             {
+    //                 "src": "/ico/icon-192x192.png",
+    //                 "sizes": "192x192",
+    //                 "type": "image/png"
+    //             },
+    //             {
+    //                 "src": "/ico/icon-512x512.png",
+    //                 "sizes": "512x512",
+    //                 "type": "image/png"
+    //             }
+    //         ],
+    //         "launch_type": "multiple-clients"
+    //     }
+    // ]
 }
