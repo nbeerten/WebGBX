@@ -27,7 +27,7 @@
     <script src="/js/app.js" type="application/javascript"></script>
     @livewireStyles
 </head>
-<body class="bg-neutral-900 text-white">
+<body class="bg-neutral-900 text-white no-scrollbar">
     <header>
         {{-- Main navigation bar --}}
         @include('layouts.nav')
@@ -43,7 +43,9 @@
         @section('content')
         @show
     </main>
+    <footer class="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8">
+        @include('layouts.footer')
+    </footer>
     @livewireScripts
 </body>
-
 </html>

@@ -1,4 +1,4 @@
-<div wire:init="loadopenmaps" class="flex flex-nowrap h-full grow overflow-x-scroll no-scrollbar rounded-md space-x-4 pr-2 lg:pr-8">
+<div class="flex flex-nowrap h-full grow overflow-x-scroll no-scrollbar rounded-md space-x-4 pr-2 lg:pr-8">
     @if($openmaps !== null)
         @foreach ($openmaps as $map)
         <span @class([

@@ -20,10 +20,7 @@ class Openmaps extends Component
 
     public function render()
     {
-        return view('livewire.nav.openmaps', [
-            'openmaps' => $this->readyToLoad
-                ? $this->openmaps
-                : null
-        ]);
+        $this->openmaps = session('user.openmaps');
+        return view('livewire.nav.openmaps');
     }
 }
