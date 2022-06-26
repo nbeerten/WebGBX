@@ -1,3 +1,4 @@
+# BRANCH CONTAINING PRODUCTION FILES. Not for looking into code, just for easy deployment. Stuff is not in sync with server.
 # WebGBX
 Work in progress.
 Web-based GBX file inspector
