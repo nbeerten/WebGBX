@@ -3,17 +3,13 @@
 @tailwind utilities;
 @tailwind variants;
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
-
-/* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
 }
 
 .tooltip:after {
@@ -57,3 +53,27 @@
     83.33% {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 100%}
     100%   {background-position: calc(0*100%/3) 50% ,calc(1*100%/3) 50% ,calc(2*100%/3) 50% ,calc(3*100%/3) 50% }
   }
+
+.tab-invert-rounded::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: -0.7rem;
+    width: 0.7rem;
+    height: 1rem;
+    border-bottom-left-radius: 0.375rem;
+    box-shadow: 0 0.5rem 0 0 #171717;
+    background-color: transparent;
+}
+
+.tab-invert-rounded::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -0.7rem;
+    width: 0.7rem;
+    height: 1rem;
+    border-bottom-right-radius: 0.375rem;
+    box-shadow: 0 0.5rem 0 0 #171717;
+    background-color: transparent;
+}

@@ -24,6 +24,22 @@ class processGBX extends Controller
         $request->session()->put('mapinfo.' . $mapinfo['uid'], $mapinfo);
         $request->session()->push('user.openmaps', ['uid' => $mapinfo['uid'], 'name' => $mapinfo['name']]);
 
-        return redirect()->route('gbxid', ['id' => $mapinfo['uid']]);
+        return redirect(route('maps.view').'#'.$mapinfo['uid']);
+    }
+
+    public function open(Request $request)
+    {
+        try {
+            $MapInfo = new MapInfo($request->file('map')->get());
+        } catch (\Exception $e) {
+            abort(400, "Map wasn't able to be parsed: " . $e->getMessage());
+        }
+        /* The collect function turns the array into a collection (string thing in laravel that is able to be stored in session) */
+        $MapInfo = collect($MapInfo->get());
+
+        $request->session()->put('mapinfo.' . $MapInfo['uid'], $MapInfo);
+        $request->session()->push('user.openmaps', ['uid' => $MapInfo['uid'], 'name' => $MapInfo['name']['plain']]);
+
+        return redirect(route('home').'#'.$MapInfo['uid']);
     }
 }
