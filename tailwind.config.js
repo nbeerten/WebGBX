@@ -15,11 +15,11 @@ module.exports = {
             }
         },
         fontFamily: {
-            'sans': ['Montserrat', 'ui-sans-serif', 'system-ui'],
+            'sans': ['"MontserratVariable"', 'ui-sans-serif'],
             'serif': ['ui-serif', 'Georgia'],
-            'mono': ['"Ubuntu Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
-            'display': ['Ubuntu', 'system-ui'],
-            'body': ['Montserrat', 'system-ui'],
+            'mono': ['"Fira CodeVariable"', 'ui-monospace'],
+            'display': ['MontserratVariable', 'ui-sans-serif'],
+            'body': ['MontserratVariable', 'ui-sans-serif'],
         },
         plugins: [],
     }

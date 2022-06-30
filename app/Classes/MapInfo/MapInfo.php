@@ -3,19 +3,26 @@
 namespace App\Classes\MapInfo;
 
 //  Added
-use Manialib\Formatting\ManiaplanetString;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Cache;
-
 use App\Classes\GBXParser\Map;
 use App\Classes\MedalTime\MedalTime;
+
+use Illuminate\Support\Facades\Request;
+use Manialib\Formatting\ManiaplanetString;
 use App\Classes\OnlineMapServices\OnlineMapServices;
 
+/**
+ * MapInfo
+ */
 class MapInfo
 {
     protected $map;
-
+    
+    /**
+     * Construct a new MapInfo object
+     *
+     * @param  mixed $file String of map file
+     * @return void
+     */
     function __construct($file)
     {
         /* File = $request->file('map')->get() */
@@ -26,7 +33,13 @@ class MapInfo
         }
         return;
     }
-
+    
+    /**
+     * Parse the map file and return a Map object
+     *
+     * @param  mixed $file
+     * @return void
+     */
     public function parse($file) {
         return Map::loadString($file);
     }
@@ -48,6 +61,13 @@ class MapInfo
         $mapinfo['nbLaps'] = $map->getNbLaps() == 0 ? null : $map->getNbLaps();
         $mapinfo['mod'] = $map->getMod() ?? '';
         $mapinfo['displayCost'] = $map->getDisplayCost() ?? '';
+        $mapinfo['exeBuild'] = $map->getExeBuild() ?? '';
+        $mapinfo['exeVersion'] = $map->getExeVersion() ?? '';
+        $mapinfo['lightmap'] = $map->getLightmap() ?? null;
+        $mapinfo['mood'] = $map->getMood() ?? '';
+        $mapinfo['hasGhostBlocks'] = $map->hasGhostBlocks() ?? null;
+        
+        $mapinfo['comments'] = $map->getComments() ?? '';
 
         $mapinfo['medals'] = [
             'author' => Medaltime::format($map->getAuthorTime()) ?? 0,
@@ -78,7 +98,7 @@ class MapInfo
             $mapinfo['OMP'] = [
                 "tmio" => 
                     ['url' => "https://trackmania.io/#/leaderboard/{$OMP['mapUid']}" ?? '',
-                    'timestamp' => date('l, d F Y H:i', strtotime($OMP['timestamp'])) ?? '',
+                    'timestamp' => date('D, d M Y H:i', strtotime($OMP['timestamp'])) ?? '',
                     'fileName' => $OMP['filename'] ?? '',
                     'collectionName' => $OMP['collectionName'] ?? '',
                     'mapType' => $OMP['mapType'] ?? '',

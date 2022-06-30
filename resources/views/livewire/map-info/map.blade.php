@@ -1,3 +1,13 @@
+@php
+$hi_checkmark = '<svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>';
+
+$hi_x = '<svg xmlns="http://www.w3.org/2000/svg" class="inline h-5 w-5 text-red-600" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>';
+@endphp
+
 <div x-show="tab == '#{{ $uid }}'" x-cloak wire:ignore.self>
     <div wire:init="loadMap">
         @if($map !== null)
@@ -41,15 +51,7 @@
                                         </tr>
                                         <tr>
                                             <td>Filename</td>
-                                            <td class="text-right">{{ $map['OMP']['tmio']['fileName'] }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Collection</td>
-                                            <td class="text-right">{{ $map['OMP']['tmio']['collectionName'] }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Map Type</td>
-                                            <td class="text-right">{{ $map['OMP']['tmio']['mapType'] }}</td>
+                                            <td class="text-right font-mono">{{ $map['OMP']['tmio']['fileName'] }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -93,7 +95,61 @@
                 @endisset
 
                 <section class="px-4 py-3 bg-black rounded-md">
-                    <div class="md:flex gap-8">
+                    <div class="md:flex gap-8">                        
+                        <div class="w-full md:w-1/2">
+                            <table class="table-auto w-full">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left pr-3 py-1">Headers</th>
+                                        <th class="text-left py-1"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left pr-2">Validated</td>
+                                        <td class="text-right">{!! boolval($map['validated']) ? $hi_checkmark : $hi_x !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Multilap</td>
+                                        <td class="text-right">{!! $map['nbLaps'] == null ? $hi_x : $hi_checkmark !!}</td>
+                                    </tr>
+                                    @if($map['nbLaps'] > 0)
+                                    <tr>
+                                        <td class="text-left pr-2">Amount of laps</td>
+                                        <td class="text-right">{{ $map['nbLaps'] }}</td>
+                                    </tr>
+                                    @endif
+                                    <tr>
+                                        <td class="text-left pr-2 text-nowrap">Mod</td>
+                                        <td class="truncate max-w-0 text-right" title="{{ $map['mod'] }}">{!! $map['mod'] == null ? $hi_x : $map['mod'] !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Ghost Blocks</td>
+                                        <td class="text-right">{!! boolval($map['hasGhostBlocks']) ? $hi_checkmark : $hi_x !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Display Cost</td>
+                                        <td class="text-right font-mono">{{ $map['displayCost'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Exe Build</td>
+                                        <td class="text-right font-mono text-sm">{{ $map['exeBuild'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Exe Version</td>
+                                        <td class="text-right font-mono text-sm">{{ $map['exeVersion'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Lightmap</td>
+                                        <td class="text-right font-mono">{{ $map['lightmap'] }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left pr-2">Mood</td>
+                                        <td class="text-right">{{ $map['mood'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="md:w-1/2">
                             <table class="table-auto w-full">
                                 <thead>
@@ -123,36 +179,6 @@
                                         <td class="px-2"><img class="h-5 w-5" src="/assets/medal_bronze.png"></td>
                                         <td class="text-left pr-3 py-1">Bronze Medal</td>
                                         <td class="text-right px-3 py-1">{{ $map['medals']['bronze'] }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="w-full md:w-1/2">
-                            <table class="table-auto w-full">
-                                <thead>
-                                    <tr>
-                                        <th class="text-left pr-3 py-1">Property</th>
-                                        <th class="text-left py-1">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left pr-2">Validated</td>
-                                        <td>{{ $map['validated'] }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-left pr-2">Multilap</td>
-                                        <td>{{ $map['nbLaps'] == null ? "False" : "True"  }}</td>
-                                    </tr>
-                                    @if($map['nbLaps'] > 0)
-                                    <tr>
-                                        <td class="text-left pr-2">Amount of laps</td>
-                                        <td>{{ $map['nbLaps'] }}</td>
-                                    </tr>
-                                    @endif
-                                    <tr>
-                                        <td class="text-left pr-2 text-nowrap">Mod</td>
-                                        <td class="truncate max-w-0" title="{{ $map['mod'] }}">{{ $map['mod'] }}</td>
                                     </tr>
                                 </tbody>
                             </table>
