@@ -15,6 +15,7 @@ class MapTabBar extends Component
     {
         Cache::forget('mapinfo/'.$id);
         Cache::forget('thumbnail/'.$id);
+        Cache::forget('tmio/'.$id);
         session()->forget(['mapinfo.' . $id, 'mapthumbnail.' . $id]);
         $openmaps = session()->get('user.openmaps'); // Second argument is a default value
         foreach ($openmaps as $key => $val) {

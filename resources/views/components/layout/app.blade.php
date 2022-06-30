@@ -12,6 +12,13 @@
 
     {{-- AlpineJS --}}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+        Alpine.magic('clipboard', () => {
+            return subject => navigator.clipboard.writeText(subject)
+        })
+        })
+    </script>
 
     {{-- Required Livewire Styles --}}
     @livewireStyles
@@ -56,7 +63,7 @@
     </header>
 
     {{-- Main content --}}
-    <main class="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8">
+    <main class="min-h-[80vh] max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8">
         {{ $slot }}
     </main>
 

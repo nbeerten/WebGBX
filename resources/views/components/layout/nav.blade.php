@@ -5,18 +5,17 @@
                 <img class="block h-8 w-auto border border-zinc-700 rounded-full shadow-md shadow-black/80" src="/assets/logo_plain.svg" alt="WebGBX">
                 <h1 class="hidden lg:block ml-2 text-white text-xl font-bold">WebGBX</h1>
             </div>
-            <div class="flex ml-6 overflow-hidden space-x-4">
+            <div class="flex ml-6 space-x-4">
                 <a href="{{ route("home") }}" @class([
-                    'px-3 py-2 rounded-md text-sm font-medium shrink-0',
+                    'px-3 py-2 rounded-md text-sm font-medium shrink-0 default-outline',
                     'bg-neutral-900 text-white' => Request::routeIs('home'),
                     'text-neutral-300 hover:bg-neutral-700 hover:text-white ' => ! Request::routeIs('home')
-                ])>Homepage</a>
-                
-                <a href="{{ route("maps.view") }}" @class([
-                    'px-3 py-2 rounded-md text-sm font-medium shrink-0',
-                    'bg-neutral-900 text-white' => Request::routeIs('maps.view'),
-                    'text-neutral-300 hover:bg-neutral-700 hover:text-white ' => ! Request::routeIs('maps.view')
-                ])>Maps</a>
+                ])>Home</a>
+                <a href="{{ route("about") }}" @class([
+                    'px-3 py-2 rounded-md text-sm font-medium shrink-0 default-outline',
+                    'bg-neutral-900 text-white' => Request::routeIs('about'),
+                    'text-neutral-300 hover:bg-neutral-700 hover:text-white ' => ! Request::routeIs('about')
+                ])>About</a>
             </div>
         </div>
     </div>

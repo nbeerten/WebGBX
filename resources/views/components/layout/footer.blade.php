@@ -1,5 +1,5 @@
 <footer {{ $attributes }}>
-    <div class="py-4 flex flex-row justify-between items-center">
+    <div class="py-4 flex flex-row justify-between items-center border-t border-zinc-500">
         <div>
             <p class="font-medium">©️2022 Nils Beerten</p>
         </div>

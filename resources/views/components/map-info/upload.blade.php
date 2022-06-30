@@ -5,7 +5,7 @@
     <form method="POST" action="/open" enctype="multipart/form-data" class="flex flex-col gap-2 items-center py-4">
         @csrf
         <label class="w-full" for="fileinput">
-            <div class="py-3 px-8 rounded-md border border-zinc-500 text-xl font-semibold bg-neutral-800 text-white hover:bg-neutral-700">
+            <div class="py-3 px-8 rounded-md border border-zinc-500 text-xl font-semibold bg-neutral-800 text-white hover:bg-neutral-700 cursor-pointer default-outline" tabindex="0" onkeypress="this.click();">
                 <div class="flex flex-col h-full items-center">
                     <h3>Choose map file</h3>
                     <p class="file-name block font-mono text-sm">No file chosen</p>
@@ -28,4 +28,21 @@
         document.querySelector('.file-name').textContent = fileNameAndSize;
         });
     </script>
+
+    <div class="h-px w-full bg-zinc-500 mt-12 mb-8"></div>
+
+    <section class="flex flex-row gap-8 w-full">
+        <div class="w-2/3 rounded-md aspect-video bg-neutral-800 grid place-content-center">
+            <img src="/assets/13-14_30-06_1920x1080.png">
+        </div>
+        <div class="w-1/3">
+            <p>
+                <span class="font-bold">WebGBX</span> is a web application for uploading and viewing .Map.Gbx files.
+                This tool allows you to easily view the map and its headers right from your browser. No installation needed.
+                All data related to the map is stored on the server, in a session. When you choose a map a unique identifier get's created, this identifier will be stored
+                in your browser and on the server. All map information (including but not limited to thumbnail, author, map name, etc.) will not be public,
+                because the server checks for the unique identifier. For sharing a map you can use services like <a href="https://trackmania.io/" class="underline text-blue-500 hover:text-blue-600">Trackmania.io</a> or <a href="https://trackmania.exchange/" class="underline text-blue-500 hover:text-blue-600">Trackmania.exchange</a>.
+            </p>
+        </div>
+    </section>
 </div>

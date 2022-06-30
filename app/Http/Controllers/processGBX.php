@@ -40,6 +40,6 @@ class processGBX extends Controller
         $request->session()->put('mapinfo.' . $MapInfo['uid'], $MapInfo);
         $request->session()->push('user.openmaps', ['uid' => $MapInfo['uid'], 'name' => $MapInfo['name']['plain']]);
 
-        return redirect(route('home').'#'.$MapInfo['uid']);
+        return redirect(route('home')."#{$MapInfo['uid']}");
     }
 }

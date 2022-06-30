@@ -3,7 +3,7 @@
         @if($map !== null)
         <div class="flex flex-col md:flex-row gap-4 py-8">
             <div class="w-full md:w-2/6 rounded-md overflow-hidden">
-                <img src="{{ route('gbxthumbnail', ['id' => $map['uid']]) }}" class="bg-slate-600 bg-gradient-to-tr from-slate-800 to-zinc-800 aspect-square md:aspect-auto rounded-md">
+                <img src="{{ $map['thumbnail'] }}" class="bg-slate-600 bg-gradient-to-tr from-slate-800 to-zinc-800 aspect-square md:aspect-auto rounded-md">
             </div>
             <div class="w-full md:w-4/6 flex flex-col gap-4">
                 <section>
@@ -19,33 +19,73 @@
                             <a href="{{ $map['OMP']['tmio']['url']  }}"
                                 class="rounded-md bg-blue-600 w-full md:w-1/2 px-4 py-2 text-center">Trackmania.io</a>
                             <a href="{{ $map['OMP']['tmx'] }}"
-                                class="rounded-md bg-green-900 w-full md:w-1/2 px-4 py-2 text-center">TrackmaniaExchange</a>
+                                class="rounded-md bg-[#003228] hover:bg-[#00715a] w-full md:w-1/2 px-4 py-2 flex flex-row gap-2 place-content-center transition duration-75"><img class="my-auto h-4 w-4" src="/assets/x_w_sm.png">TrackmaniaExchange</a>
                         </div>
-                        <div class="flex flex-col md:flex-row gap-2 md:gap-4">
-                            <div class="w-full md:w-2/3">
+                        <div class="h-px w-full bg-zinc-500 my-2"></div>
+                        <h4 class="font-bold my-1">Online Map Information</h4>
+                        <div class="flex flex-col md:flex-row gap-y-2 md:gap-x-4">
+                            <div class="w-full md:w-2/3 lg:w-1/2 p-0 md:pr-3">
                                 <table class="table-auto w-full">
                                     <tbody>
                                         <tr>
-                                            <td>Submitter</td>
-                                            <td>{{ $map['OMP']['tmio']['submitterplayer']['name'] }}</td>
+                                            <td>Author</td>
+                                            <td class="text-right">[{!! $map['OMP']['tmio']['authorplayer']['tag'] !!}] {{ $map['OMP']['tmio']['authorplayer']['name'] }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Timestamp</td>
-                                            <td>{{ $map['OMP']['tmio']['timestamp'] }}</td>
+                                            <td>Submitter</td>
+                                            <td class="text-right">[{!! $map['OMP']['tmio']['submitterplayer']['tag'] !!}] {{ $map['OMP']['tmio']['submitterplayer']['name'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time uploaded</td>
+                                            <td class="text-right">{{ $map['OMP']['tmio']['timestamp'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Filename</td>
+                                            <td class="text-right">{{ $map['OMP']['tmio']['fileName'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Collection</td>
+                                            <td class="text-right">{{ $map['OMP']['tmio']['collectionName'] }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Map Type</td>
+                                            <td class="text-right">{{ $map['OMP']['tmio']['mapType'] }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="w-full md:w-1/3 flex flex-row gap-2 h-max">
-                                <a href="{{ $map['OMP']['tmio']['fileUrl'] }}"
-                                    class="flex-1 grid place-content-center bg-neutral-800 hover:bg-neutral-700 text-white text-center font-bold py-2 px-4 rounded-md">Download</a>
-                                <button
-                                    class="grid place-content-center bg-neutral-800 hover:bg-neutral-700 text-white p-1 rounded-md aspect-square">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
-                                        <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
-                                    </svg>
-                                </button>
+                            <div class="w-full md:w-1/3 lg:w-1/2 flex flex-col gap-y-1">
+                                <h5 class="font-semibold">Nadeo File URLs:</h5>
+                                <div class="flex flex-row gap-1 w-full">
+                                    <a href="{{ $map['OMP']['tmio']['fileUrl'] }}"
+                                        class="flex-1 grid place-content-center grid-flow-col-dense gap-2 bg-neutral-800 hover:bg-neutral-700 text-white text-center font-bold py-2 px-4 rounded-md transition duration-75">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                        </svg>
+                                        Map Download</a>
+                                    <button class="grid place-content-center bg-neutral-800 hover:bg-neutral-700 focus:bg-green-700 focus-visible:bg-neutral-700 text-white p-1 rounded-md aspect-square transition duration-75" x-on:click="$clipboard('{{ $map['OMP']['tmio']['fileUrl'] }}')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                            <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="flex flex-row gap-1 w-full">
+                                    <a href="{{ $map['OMP']['tmio']['thumbnailUrl'] }}"
+                                        class="flex-1 grid place-content-center grid-flow-col-dense gap-2 bg-neutral-800 hover:bg-neutral-700 text-white text-center font-bold py-2 px-4 rounded-md transition duration-75">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                            <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                                        </svg>
+                                        Thumbnail Download</a>
+                                    <button class="grid place-content-center bg-neutral-800 hover:bg-neutral-700 focus:bg-green-700 focus-visible:bg-neutral-700 text-white p-1 rounded-md aspect-square transition duration-75" x-on:click="$clipboard('{{ $map['OMP']['tmio']['thumbnailUrl'] }}')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                                            <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </section>

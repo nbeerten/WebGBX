@@ -21,21 +21,25 @@ use App\Http\Controllers\deleteMapByID;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
+Route::get('/', [viewGBX::class, 'view'])
+    ->name('home');
 
-Route::post('/gbx', [processGBX::class, 'upload'])
-    ->name('gbx');
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
 
 Route::post('/open', [processGBX::class, 'open'])
     ->name('open');
 
-Route::get('/', [viewGBX::class, 'view'])
-    ->name('home');
-
-Route::get('/maps', [viewGBX::class, 'view'])
-    ->name('maps.view');
+/**
+ * Routes for actions on a map
+ * /maps/{mapid}/{action}
+ */
+Route::prefix('map/{id}')->name('map.')->group(function () {
+    Route::get('/delete', deleteMapByID::class)             ->name('delete');
+    Route::get('/thumbnail', [getThumbnail::class, 'get'])  ->name('thumbnail');
+});
 
 Route::get('/gbx/{id}/delete', deleteMapByID::class)
     ->name('gbxiddelete')->name('gbx.delete');

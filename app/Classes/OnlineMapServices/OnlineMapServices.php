@@ -46,6 +46,9 @@ class OnlineMapServices
                     "tmio" => 
                         ['url' => $tmio_url ?? '',
                         'timestamp' => date('l, d F Y H:i', strtotime($tmio['timestamp'])) ?? '',
+                        'fileName' => $tmio['filename'] ?? '',
+                        'collectionName' => $tmio['collectionName'] ?? '',
+                        'mapType' => $tmio['mapType'] ?? '',
                         'fileUrl' => $tmio['fileUrl'] ?? '',
                         'thumbnailUrl' => $tmio['thumbnailUrl'] ?? '',
                         'authorplayer' => [
@@ -73,7 +76,7 @@ class OnlineMapServices
     {
         $executed = RateLimiter::attempt(
             'tmio',
-            $perMinute = 30,
+            $perMinute = 35,
             function() use ($id) {
                 return OnlineMapServices::tmio($id);
             }
@@ -114,7 +117,7 @@ class OnlineMapServices
 
                     // If API call successful and map UID is equal to map UID from parsing, store in cache and API JSON as return value
                     if($api->successful() && $api['mapUid'] === $id) {
-                        Cache::put("tmio/{$id}", $api->body(), $seconds = 2592000);
+                        Cache::put("tmio/{$id}", $api->body(), $seconds = 60*10);
                         $response = $api->body();
                     } 
                     else $response = null;
