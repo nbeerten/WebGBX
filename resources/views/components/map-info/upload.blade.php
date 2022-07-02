@@ -1,14 +1,14 @@
 <div class="flex flex-col items-center pt-10">
-    <h2 class="font-extrabold text-4xl">WebGBX</h2>
+    <h2 class="text-4xl font-extrabold">WebGBX</h2>
     <p class="text-lg">Upload a .Map.Gbx file to get started</p>
 
-    <form method="POST" action="/open" enctype="multipart/form-data" class="flex flex-col gap-2 items-center py-4">
+    <form method="POST" action="/open" enctype="multipart/form-data" class="flex flex-col items-center gap-2 py-4">
         @csrf
         <label class="w-full" for="fileinput">
-            <div class="py-3 px-8 rounded-md border border-zinc-500 text-xl font-semibold bg-neutral-800 text-white hover:bg-neutral-700 cursor-pointer default-outline" tabindex="0" onkeypress="this.click();">
-                <div class="flex flex-col h-full items-center">
+            <div class="px-8 py-3 text-xl font-semibold text-white border rounded-md cursor-pointer border-zinc-500 bg-neutral-800 hover:bg-neutral-700 default-outline" tabindex="0" onkeypress="this.click();">
+                <div class="flex flex-col items-center h-full">
                     <h3>Choose map file</h3>
-                    <p class="file-name block font-mono text-sm">No file chosen</p>
+                    <p class="block font-mono text-sm file-name">No file chosen</p>
                     <input id="fileinput" type="file" name="map" accept=".Map.Gbx" class="hidden" aria-hidden="true" onchange="submit()">
                 </div>
             </div>
@@ -29,10 +29,10 @@
         });
     </script>
 
-    <div class="h-px w-full bg-zinc-500 mt-12 mb-8"></div>
+    <div class="w-full h-px mt-12 mb-8 bg-zinc-500"></div>
 
-    <section class="flex flex-row gap-8 w-full">
-        <div class="w-2/3 rounded-md aspect-video bg-neutral-800 grid place-content-center">
+    <section class="flex flex-row w-full gap-8">
+        <div class="grid w-2/3 rounded-md aspect-video bg-neutral-800 place-content-center">
             <img src="/assets/13-14_30-06_1920x1080.png">
         </div>
         <div class="w-1/3">
@@ -41,7 +41,7 @@
                 This tool allows you to easily view the map and its headers right from your browser. No installation needed.
                 All data related to the map is stored on the server, in a session. When you choose a map a unique identifier get's created, this identifier will be stored
                 in your browser and on the server. All map information (including but not limited to thumbnail, author, map name, etc.) will not be public,
-                because the server checks for the unique identifier. For sharing a map you can use services like <a href="https://trackmania.io/" class="underline text-blue-500 hover:text-blue-600">Trackmania.io</a> or <a href="https://trackmania.exchange/" class="underline text-blue-500 hover:text-blue-600">Trackmania.exchange</a>.
+                because the server checks for the unique identifier. For sharing a map you can use services like <a href="https://trackmania.io/" class="text-blue-500 underline hover:text-blue-600">Trackmania.io</a> or <a href="https://trackmania.exchange/" class="text-blue-500 underline hover:text-blue-600">Trackmania.exchange</a>.
             </p>
         </div>
     </section>

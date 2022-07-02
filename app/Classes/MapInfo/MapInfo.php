@@ -87,35 +87,35 @@ class MapInfo
 
         $mapinfo['thumbnail'] = route('map.thumbnail', ['id' => $mapinfo['uid']]);
 
-        $OMP = OnlineMapServices::get_new($mapinfo['uid']);
+        $OMS = OnlineMapServices::get_new($mapinfo['uid']);
 
-        if($OMP !== null && !is_bool($OMP)) {
-            $authorplayer_tag = new ManiaplanetString($OMP['authorplayer']['tag']);
+        if($OMS !== null && !is_bool($OMS)) {
+            $authorplayer_tag = new ManiaplanetString($OMS['authorplayer']['tag']);
             $authorplayer_tag = $authorplayer_tag->stripLinks()->stripEscapeCharacters()->toHtml();
-            $submitterplayer_tag = new ManiaplanetString($OMP['submitterplayer']['tag']);
+            $submitterplayer_tag = new ManiaplanetString($OMS['submitterplayer']['tag']);
             $submitterplayer_tag = $submitterplayer_tag->stripLinks()->stripEscapeCharacters()->toHtml();
 
-            $mapinfo['OMP'] = [
+            $mapinfo['OMS'] = [
                 "tmio" => 
-                    ['url' => "https://trackmania.io/#/leaderboard/{$OMP['mapUid']}" ?? '',
-                    'timestamp' => date('D, d M Y H:i', strtotime($OMP['timestamp'])) ?? '',
-                    'fileName' => $OMP['filename'] ?? '',
-                    'collectionName' => $OMP['collectionName'] ?? '',
-                    'mapType' => $OMP['mapType'] ?? '',
-                    'fileUrl' => $OMP['fileUrl'] ?? '',
-                    'thumbnailUrl' => $OMP['thumbnailUrl'] ?? '',
+                    ['url' => "https://trackmania.io/#/leaderboard/{$OMS['mapUid']}" ?? '',
+                    'timestamp' => date('D, d M Y H:i', strtotime($OMS['timestamp'])) ?? '',
+                    'fileName' => $OMS['filename'] ?? '',
+                    'collectionName' => $OMS['collectionName'] ?? '',
+                    'mapType' => $OMS['mapType'] ?? '',
+                    'fileUrl' => $OMS['fileUrl'] ?? '',
+                    'thumbnailUrl' => $OMS['thumbnailUrl'] ?? '',
                     'authorplayer' => [
-                        'name' => $OMP['authorplayer']['name'] ?? '',
+                        'name' => $OMS['authorplayer']['name'] ?? '',
                         'tag' => $authorplayer_tag ?? '',
-                        'zone' => $OMP['authorplayer']['zone'] ?? '',
+                        'zone' => $OMS['authorplayer']['zone'] ?? '',
                     ],
                     'submitterplayer' => [
-                        'name' => $OMP['submitterplayer']['name'] ?? '',
+                        'name' => $OMS['submitterplayer']['name'] ?? '',
                         'tag' => $submitterplayer_tag ?? '',
-                        'zone' => $OMP['submitterplayer']['zone'] ?? '',
+                        'zone' => $OMS['submitterplayer']['zone'] ?? '',
                     ]
                     ],
-                "tmx" => "https://trackmania.exchange/s/tr/{$OMP['exchangeid']}"
+                "tmx" => "https://trackmania.exchange/s/tr/{$OMS['exchangeid']}"
             ];
         }
 
