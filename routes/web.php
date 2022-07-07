@@ -1,13 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\parseGBX;
 
 use App\Http\Controllers\processGBX;
 use App\Http\Controllers\viewGBX;
 
 use App\Http\Controllers\getThumbnail;
-use App\Http\Controllers\getMapByID;
 use App\Http\Controllers\deleteMapByID;
 
 /*
@@ -30,7 +28,7 @@ Route::get('/about', function () {
 
 
 Route::post('/open', [processGBX::class, 'open'])
-    ->name('open');
+    ->name('open')->middleware('throttle:open');
 
 /**
  * Routes for actions on a map

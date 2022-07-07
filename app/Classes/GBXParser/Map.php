@@ -121,6 +121,8 @@ class Map
     protected $c8_authorLogin;
     protected $c8_authorName;
     protected $c8_authorZone;
+
+    protected $raw;
     // Additional Information End
 
     /**
@@ -182,7 +184,12 @@ class Map
     {
         return $this->c8_authorZone;
     }
+    public function getRaw()
+    {
+        return $this->raw;
+    }
     // ADDITION END
+
     /**
      * @return string
      */

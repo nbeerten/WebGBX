@@ -8,17 +8,10 @@
     
     {{-- Main JS & CSS from the compiled files --}}
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     {{-- AlpineJS --}}
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script>
-        document.addEventListener('alpine:init', () => {
-        Alpine.magic('clipboard', () => {
-            return subject => navigator.clipboard.writeText(subject)
-        })
-        })
-    </script>
+    <script src="{{ mix('js/alpinejs.js') }}" defer></script>
 
     {{-- Required Livewire Styles --}}
     @livewireStyles
@@ -38,7 +31,7 @@
     <link rel="manifest" href="/manifest.json">
 </head>
 
-<body class="bg-neutral-900 text-white no-scrollbar"> 
+<body class="text-white bg-neutral-900 no-scrollbar"> 
     {{-- Navbar and hero sections --}}
     <header>
         {{-- Main navigation bar --}}
@@ -64,7 +57,7 @@
     </main>
 
     {{-- Footer --}}
-    <x-layout.footer class="max-w-7xl mx-auto px-4 sm:px-5 md:px-6 lg:px-8" />
+    <x-layout.footer class="px-4 mx-auto max-w-7xl sm:px-5 md:px-6 lg:px-8" />
 
     {{-- Required Livewire JS Scripts --}}
     @livewireScripts

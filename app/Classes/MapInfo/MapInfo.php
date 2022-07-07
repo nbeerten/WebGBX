@@ -87,35 +87,79 @@ class MapInfo
 
         $mapinfo['thumbnail'] = route('map.thumbnail', ['id' => $mapinfo['uid']]);
 
+        $dependencies = $map->getDependencies();
+        foreach($dependencies as $dependency) {
+            $mapinfo['dependencies'][] = [
+                "file" => $dependency->getFile(),
+                "url" => $dependency->getUrl()
+            ];
+        }
+
+        // https://stackoverflow.com/a/7453922/15759912
+        function formatXmlString($xml)
+        {
+            $xml = preg_replace('/(>)(<)(\/*)/', "$1\n$2$3", $xml);
+            $token      = strtok($xml, "\n");
+            $result     = '';
+            $pad        = 0;
+            $matches    = array();
+            while ($token !== false) :
+                if (preg_match('/.+<\/\w[^>]*>$/', $token, $matches)) :
+                    $indent = 0;
+                elseif (preg_match('/^<\/\w/', $token, $matches)) :
+                    $pad--;
+                    $pad--;
+                    $pad--;
+                    $pad--;
+                    $indent = 0;
+                elseif (preg_match('/^<\w[^>]*[^\/]>.*$/', $token, $matches)) :
+                    $indent = 4;
+                else :
+                    $indent = 0;
+                endif;
+                $line    = str_pad($token, strlen($token) + $pad, ' ', STR_PAD_LEFT);
+                $result .= $line . "\n";
+                $token   = strtok("\n");
+                $pad    += $indent;
+            endwhile;
+            return $result;
+        }
+
+        $mapinfo['raw']['03043005'] = formatXmlString($map->getRaw()['03043005']) ?? '';
+
         $OMS = OnlineMapServices::get_new($mapinfo['uid']);
 
         if($OMS !== null && !is_bool($OMS)) {
-            $authorplayer_tag = new ManiaplanetString($OMS['authorplayer']['tag']);
-            $authorplayer_tag = $authorplayer_tag->stripLinks()->stripEscapeCharacters()->toHtml();
-            $submitterplayer_tag = new ManiaplanetString($OMS['submitterplayer']['tag']);
-            $submitterplayer_tag = $submitterplayer_tag->stripLinks()->stripEscapeCharacters()->toHtml();
+            if(isset($OMS['authorplayer']['tag'])) {
+                $authorplayer_tag = new ManiaplanetString($OMS['authorplayer']['tag']) ?? '';
+                $authorplayer_tag = $authorplayer_tag->stripLinks()->stripEscapeCharacters()->toHtml();
+            }
+            if(isset($OMS['submitterplayer']['tag'])) {
+                $submitterplayer_tag = new ManiaplanetString($OMS['submitterplayer']['tag']);
+                $submitterplayer_tag = $submitterplayer_tag->stripLinks()->stripEscapeCharacters()->toHtml();
+            }
 
             $mapinfo['OMS'] = [
                 "tmio" => 
-                    ['url' => "https://trackmania.io/#/leaderboard/{$OMS['mapUid']}" ?? '',
-                    'timestamp' => date('D, d M Y H:i', strtotime($OMS['timestamp'])) ?? '',
-                    'fileName' => $OMS['filename'] ?? '',
-                    'collectionName' => $OMS['collectionName'] ?? '',
-                    'mapType' => $OMS['mapType'] ?? '',
-                    'fileUrl' => $OMS['fileUrl'] ?? '',
-                    'thumbnailUrl' => $OMS['thumbnailUrl'] ?? '',
+                    ['url' => "https://trackmania.io/#/leaderboard/{$OMS['mapUid']}" ?? null,
+                    'timestamp' => date('D, d M Y H:i', strtotime($OMS['timestamp'])) ?? null,
+                    'fileName' => $OMS['filename'] ?? null,
+                    'collectionName' => $OMS['collectionName'] ?? null,
+                    'mapType' => $OMS['mapType'] ?? null,
+                    'fileUrl' => $OMS['fileUrl'] ?? null,
+                    'thumbnailUrl' => $OMS['thumbnailUrl'] ?? null,
                     'authorplayer' => [
-                        'name' => $OMS['authorplayer']['name'] ?? '',
-                        'tag' => $authorplayer_tag ?? '',
-                        'zone' => $OMS['authorplayer']['zone'] ?? '',
+                        'name' => $OMS['authorplayer']['name'] ?? null,
+                        'tag' => $authorplayer_tag ?? null,
+                        'zone' => $OMS['authorplayer']['zone'] ?? null,
                     ],
                     'submitterplayer' => [
-                        'name' => $OMS['submitterplayer']['name'] ?? '',
-                        'tag' => $submitterplayer_tag ?? '',
-                        'zone' => $OMS['submitterplayer']['zone'] ?? '',
+                        'name' => $OMS['submitterplayer']['name'] ?? null,
+                        'tag' => $submitterplayer_tag ?? null,
+                        'zone' => $OMS['submitterplayer']['zone'] ?? null,
                     ]
                     ],
-                "tmx" => "https://trackmania.exchange/s/tr/{$OMS['exchangeid']}"
+                "tmx" => "https://trackmania.exchange/s/tr/{$OMS['exchangeid']}" ?? null
             ];
         }
 

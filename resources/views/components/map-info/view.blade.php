@@ -2,7 +2,7 @@
 $openmaps = session('user.openmaps');
 @endphp
 <div class="relative" x-data="{ tab: window.location.hash ? window.location.hash : '#' }" x-on:hashchange.window="window.location.hash = tab">
-    <div class="absolute top-0 left-0 w-full overflow-x-scroll -translate-y-full no-scrollbar">
+    <div class="w-full overflow-x-scroll -translate-y-full no-scrollbar absolute">
         @livewire('nav.map-tab-bar')
     </div>
 
@@ -12,7 +12,7 @@ $openmaps = session('user.openmaps');
         @endforeach
     @endisset
 
-    <div x-show="tab == '#'" x-cloak>
+    <div x-show="tab == '#'">
         <x-map-info.upload />
     </div>
 </div>

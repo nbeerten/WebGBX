@@ -11,7 +11,7 @@ module.exports = {
     theme: {
         extend: {
             backgroundImage: {
-                "hero-tm-tantoura": "url('/assets/tantoura.jpg')",
+                "hero-tm-tantoura": "url('/storage/Reshade_Ubiquitous.png')",
             },
         },
         fontFamily: {

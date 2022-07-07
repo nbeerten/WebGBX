@@ -10,11 +10,13 @@
         "production": "mix --production"
     },
     "devDependencies": {
+        "@types/postcss-import": "^14.0.0",
         "autoprefixer": "^10.4.7",
         "axios": "^0.25",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.4.14",
+        "postcss-import": "^14.1.0",
         "prettier": "2.7.1",
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.53.0",
@@ -23,6 +25,7 @@
     },
     "dependencies": {
         "@fontsource/fira-code": "^4.5.10",
-        "@fontsource/montserrat": "^4.5.11"
+        "@fontsource/montserrat": "^4.5.11",
+        "alpinejs": "^3.10.2"
     }
 }

@@ -106,7 +106,13 @@ class Parser
         $properties = [];
         $domDocument = new \DOMDocument();
         $internalError = libxml_use_internal_errors(true);
-        $domDocument->loadHTML('<?xml encoding="UTF-8">' . self::fetchString($fp));
+        
+        // Added
+        $content = self::fetchString($fp);
+        $properties['raw']['03043005'] = $content;
+        // Added End
+
+        $domDocument->loadHTML('<?xml encoding="UTF-8">' . $content);
         libxml_use_internal_errors($internalError);
 
         $header = static::getNodeAttributesValues($domDocument->getElementsByTagName('header')->item(0));

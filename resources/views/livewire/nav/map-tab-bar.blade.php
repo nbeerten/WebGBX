@@ -1,8 +1,8 @@
-<div class="flex flex-row overflow-x-scroll no-scrollbar gap-3 px-[0.375rem] -ml-[0.375rem] mr-[0.375rem] whitespace-nowrap">
+<div class="flex flex-row gap-3 px-1 pt-1 overflow-x-scroll no-scrollbar whitespace-nowrap backdrop-blur bg-neutral-800/40 rounded-t-md drop-shadow-lg">
     {{-- Home button section --}}
     <div :class="{ 'bg-neutral-900 text-white tab-invert-rounded': tab === '#',
                    'text-neutral-300 hover:bg-neutral-800 hover:text-white': tab !== '#' }"
-          class="relative flex flex-row text-sm font-medium transition duration-100 rounded-t-md">
+          class="relative flex flex-row text-sm font-medium transition duration-100 rounded-t-md" title="Home tab">
         
         <a href="#" x-on:click="tab='#'" class="px-3 py-2 transition-transform duration-75 origin-center outline-none md:hover:scale-125">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
@@ -22,7 +22,7 @@
                 <a href="#{{ $map['uid'] }}" x-on:click="tab='#{{ $map['uid'] }}'" class="px-3 py-2 default-outline">
                     {{ $map['name'] }}
                 </a>
-                <a href="#" wire:click="delete('{{ $map['uid'] }}')" x-on:click="tab='#'" class="px-2 py-2 transition-transform duration-75 origin-center hover:scale-125 default-outline">
+                <a href="#" wire:click="delete('{{ $map['uid'] }}')" x-on:click="tab='#'" class="px-2 py-2 transition-transform duration-75 origin-center hover:scale-125 default-outline" title="Delete this map">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
@@ -37,7 +37,7 @@
 
     {{-- Easy access add/delete button section --}}
 
-    <form method="POST" action="/open" enctype="multipart/form-data" class="flex flex-row my-1 text-sm font-medium transition-transform duration-75 origin-center rounded-md text-neutral-300 hover:bg-neutral-800 hover:text-white hover:scale-110">
+    <form method="POST" action="/open" enctype="multipart/form-data" class="flex flex-row my-1 text-sm font-medium transition-transform duration-75 origin-center rounded-md text-neutral-300 hover:bg-neutral-800 hover:text-white hover:scale-110" title="Choose map file">
         @csrf
         <label for="quick_fileinput" class="cursor-pointer default-outline" tabindex="0" onkeypress="this.click();">
             <div class="p-1 px-1">
@@ -49,7 +49,9 @@
         </label>
     </form>
 
-    <div class="flex flex-row my-1 text-sm font-medium transition-transform duration-75 origin-center rounded-md text-neutral-300 hover:bg-neutral-800 hover:text-white hover:scale-110">
+    <div class="grow"></div>
+
+    <div class="flex flex-row my-1 text-sm font-medium transition-transform duration-75 origin-center rounded-md text-neutral-300 hover:bg-neutral-800 hover:text-white hover:scale-110" title="Delete all maps">
         <a href="#" wire:click="deleteAll" x-on:click="tab='#'" class="p-1 px-1 default-outline">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />

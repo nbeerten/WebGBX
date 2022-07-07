@@ -1,78 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "tailwindcss/variants";
 
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
+@import "~@fontsource/montserrat/variable.css";
+@import "~@fontsource/montserrat/variable-italic.css";
+@import "~@fontsource/fira-code/variable.css";
+
+@import "tooltip.css";
+@import "scrollbar.css";
+@import "loading/dots.css";
+
+/* AlpineJS css https://alpinejs.dev/directives/cloak */
+[x-cloak] { 
+    display: none !important; 
 }
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.tooltip:after {
-    content: "";
-    opacity: 0;
-    display: block;
-    position: absolute;
-    top: -50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%) scale(0);
-    transform-origin: bottom;
-    transition: opacity 0.2s ease-in-out, transform 0.1s ease-in-out;
-}
-
-.tooltip:hover::after {
-    content: attr(popup);
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-
-    background-color: #000;
-    padding: 0.4rem 1rem;
-    border-radius: 0.25rem;
-}
-
-.loading-dots-3 {
-    height: 30px;
-    aspect-ratio: 2.5;
-    --_g: no-repeat radial-gradient(farthest-side, #fff 90%, #0000);
-    background: var(--_g), var(--_g), var(--_g), var(--_g);
-    background-size: 20% 50%;
-    animation: loading-dots-3 1s infinite linear;
-}
-
-@keyframes loading-dots-3 {
-    0% {
-        background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-            calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-    }
-    16.67% {
-        background-position: calc(0 * 100% / 3) 0, calc(1 * 100% / 3) 50%,
-            calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-    }
-    33.33% {
-        background-position: calc(0 * 100% / 3) 100%, calc(1 * 100% / 3) 0,
-            calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-    }
-    50% {
-        background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 100%,
-            calc(2 * 100% / 3) 0, calc(3 * 100% / 3) 50%;
-    }
-    66.67% {
-        background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-            calc(2 * 100% / 3) 100%, calc(3 * 100% / 3) 0;
-    }
-    83.33% {
-        background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-            calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 100%;
-    }
-    100% {
-        background-position: calc(0 * 100% / 3) 50%, calc(1 * 100% / 3) 50%,
-            calc(2 * 100% / 3) 50%, calc(3 * 100% / 3) 50%;
-    }
-}
+/* End AlpineJS css */
 
 .tab-invert-rounded::after {
     content: "";

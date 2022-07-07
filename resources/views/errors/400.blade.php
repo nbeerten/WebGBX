@@ -1,4 +1,4 @@
-@extends('errors::minimal')
+@extends('errors::themed')
 
 @section('title', __('Bad Request'))
 @section('code', '400')

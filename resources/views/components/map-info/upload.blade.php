@@ -29,19 +29,32 @@
         });
     </script>
 
+    @if ($errors->any())
+    <div class="px-8 py-3 text-xl font-semibold text-white border rounded-md border-zinc-500 bg-neutral-800 default-outline">
+        <h3 class="font-bold">Error!</h3>
+        <div class="text-base text-red-600">
+            <ul class="list-disc list-inside marker:text-white">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    @endif
+
     <div class="w-full h-px mt-12 mb-8 bg-zinc-500"></div>
 
-    <section class="flex flex-row w-full gap-8">
-        <div class="grid w-2/3 rounded-md aspect-video bg-neutral-800 place-content-center">
-            <img src="/assets/13-14_30-06_1920x1080.png">
+    <section class="flex flex-col md:flex-row w-full gap-8">
+        <div class="grid rounded-md md:w-2/3 aspect-video bg-neutral-800 place-content-center">
+            <img src="{{ asset('storage/example_preview.png') }}">
         </div>
-        <div class="w-1/3">
+        <div class="md:w-1/3">
             <p>
                 <span class="font-bold">WebGBX</span> is a web application for uploading and viewing .Map.Gbx files.
                 This tool allows you to easily view the map and its headers right from your browser. No installation needed.
                 All data related to the map is stored on the server, in a session. When you choose a map a unique identifier get's created, this identifier will be stored
                 in your browser and on the server. All map information (including but not limited to thumbnail, author, map name, etc.) will not be public,
-                because the server checks for the unique identifier. For sharing a map you can use services like <a href="https://trackmania.io/" class="text-blue-500 underline hover:text-blue-600">Trackmania.io</a> or <a href="https://trackmania.exchange/" class="text-blue-500 underline hover:text-blue-600">Trackmania.exchange</a>.
+                because the server checks for the unique identifier. For sharing a map you can use services like <a href="https://trackmania.io/" class="text-blue-500 hover:underline hover:text-blue-600">Trackmania.io</a> or <a href="https://trackmania.exchange/" class="text-blue-500 hover:underline hover:text-blue-600">Trackmania.exchange</a>.
             </p>
         </div>
     </section>

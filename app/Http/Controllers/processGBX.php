@@ -29,6 +29,10 @@ class processGBX extends Controller
 
     public function open(Request $request)
     {
+        $validated = $request->validate([
+            'map' => 'bail|file|max:51200|mimetypes:application/octet-stream',
+        ]);
+
         try {
             $MapInfo = new MapInfo($request->file('map')->get());
         } catch (\Exception $e) {
