@@ -180,6 +180,7 @@ class Parser
                     imageflip($gdImage, IMG_FLIP_VERTICAL);
                     imagejpeg($gdImage, $temporaryStream, 100);
                     $properties['thumbnail'] = new Thumbnail(stream_get_contents($temporaryStream, -1, 0));
+                    $properties['thumbnailsize'] = fstat($temporaryStream)['size'];
                 }
             }
             self::ignore($fp, strlen('</Thumbnail.jpg>'));

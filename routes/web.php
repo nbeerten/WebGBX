@@ -35,8 +35,9 @@ Route::post('/open', [processGBX::class, 'open'])
  * /maps/{mapid}/{action}
  */
 Route::prefix('map/{id}')->name('map.')->group(function () {
-    Route::get('/delete', deleteMapByID::class)             ->name('delete');
-    Route::get('/thumbnail', [getThumbnail::class, 'get'])  ->name('thumbnail');
+    Route::get('/delete', deleteMapByID::class)                 ->name('delete');
+    Route::get('/Thumbnail.jpg', [getThumbnail::class, 'get'])  ->name('thumbnail');
+    Route::get('/thumbnail', [getThumbnail::class, 'get']);
 });
 
 Route::get('/gbx/{id}/delete', deleteMapByID::class)

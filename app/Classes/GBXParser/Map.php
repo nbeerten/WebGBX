@@ -122,6 +122,8 @@ class Map
     protected $c8_authorName;
     protected $c8_authorZone;
 
+    protected $thumbnailsize;
+
     protected $raw;
     // Additional Information End
 
@@ -187,6 +189,10 @@ class Map
     public function getRaw()
     {
         return $this->raw;
+    }
+    public function getThumbnailSize()
+    {
+        return $this->thumbnailsize;
     }
     // ADDITION END
 

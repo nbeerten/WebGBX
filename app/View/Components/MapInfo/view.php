@@ -8,7 +8,6 @@ class view extends Component
 {
 
     public $map;
-    public $OnlineMapServices;
 
     /**
      * Create a new component instance.

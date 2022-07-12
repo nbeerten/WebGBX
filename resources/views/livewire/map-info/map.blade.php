@@ -31,7 +31,24 @@ $hi_x = '<svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5 text-red-
             
             <div class="flex flex-col gap-4 pb-8 md:flex-row" x-show="tab == '#grid'">
                 <div class="flex flex-col w-full gap-4 overflow-hidden rounded-md md:w-2/6">
-                    <img src="{{ $map['thumbnail'] }}" class="rounded-md bg-slate-600 bg-gradient-to-tr from-slate-800 to-zinc-800 aspect-square md:aspect-auto">
+                    <div class="bg-black rounded-md" x-data="{width: 0, height: 0}">
+                        <img id="thumbnail_{{ $uid }}" src="{{ $map['thumbnail'] }}" class="rounded-md bg-slate-600 bg-gradient-to-tr from-slate-800 to-zinc-800 aspect-square md:aspect-auto"
+                        x-on:load="width = document.querySelector('#thumbnail_{{ $uid }}').naturalWidth; height = document.querySelector('#thumbnail_{{ $uid }}').naturalHeight">
+                        <div class="px-4 py-1 font-mono flex flex-row justify-between">
+                            <div>
+                                <span x-text="width" aria-label="width"></span><span aria-hidden="true">x</span><span x-text="height" aria-label="height"></span>px
+                            </div>
+                            <div>
+                                <span>{{ $map['thumbnailsize'] }}</span>
+                                <a class="inline" href="{{ $map['thumbnail'] }}" target="_blank" download="Thumbnail_{{ $map['name']['plain'] }}.jpg" title="Download Thumbnail">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline fill-neutral-300" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
 
                     
                     <section class="px-4 py-3 bg-black rounded-md">
@@ -261,13 +278,23 @@ $hi_x = '<svg xmlns="http://www.w3.org/2000/svg" class="inline w-5 h-5 text-red-
                     <img src="{{ $map['thumbnail'] }}" class="rounded-md bg-slate-600 bg-gradient-to-tr from-slate-800 to-zinc-800 aspect-square md:aspect-auto">
                 </div>
 
-                <div class="flex flex-col w-full gap-4 md:w-4/6">
+                <div class="flex flex-col w-full gap-4 md:w-4/6 overflow-hidden">
                     <section>
-                        <h4 class="font-semibold">03043005</h4>
-                        <div class="px-4 py-2 overflow-x-scroll rounded-md no-scrollbar bg-neutral-800">
-<span class="w-full font-mono text-sm">
+                        <h4 class="font-semibold">Chunk 03043005</h4>
+                        <div class="overflow-x-scroll px-4 rounded-md no-scrollbar bg-neutral-800 prose prose-slate">
+<pre><code class="language-html">
 {{ $map['raw']['03043005'] }}
-</span>
+</code></pre>
+                        </div>
+                    </section>                    
+                    <section>
+                        <h4 class="font-semibold">Chunk 03043008</h4>
+                        <div class="overflow-x-scroll px-4 py-2 rounded-md no-scrollbar bg-neutral-800 prose prose-slate">
+                            <p class="font-mono whitespace-pre-line"
+                            >   Author Login: {{ $map['raw']['03043008']['login'] }}
+                                Author Name: {{ $map['raw']['03043008']['name'] }}
+                                Author Zone: {{ $map['raw']['03043008']['zone'] }}
+                            </p>
                         </div>
                     </section>
                 </div>

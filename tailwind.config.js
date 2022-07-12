@@ -21,6 +21,9 @@ module.exports = {
             display: ["MontserratVariable", "ui-sans-serif"],
             body: ["MontserratVariable", "ui-sans-serif"],
         },
-        plugins: [],
+        plugins: [
+            require('@tailwindcss/typography'),
+            // ...
+        ],
     },
 };

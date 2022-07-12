@@ -87,6 +87,20 @@ class MapInfo
 
         $mapinfo['thumbnail'] = route('map.thumbnail', ['id' => $mapinfo['uid']]);
 
+        // http://jeffreysambells.com/2012/10/25/human-readable-filesize-php
+        function human_filesize($size, $precision = 2) {
+            static $units = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
+            $step = 1024;
+            $i = 0;
+            while (($size / $step) > 0.9) {
+                $size = $size / $step;
+                $i++;
+            }
+            return round($size, $precision).$units[$i];
+        }
+
+        $mapinfo['thumbnailsize'] = human_filesize($map->getThumbnailSize(), 2);
+
         $dependencies = $map->getDependencies();
         foreach($dependencies as $dependency) {
             $mapinfo['dependencies'][] = [
@@ -126,6 +140,11 @@ class MapInfo
         }
 
         $mapinfo['raw']['03043005'] = formatXmlString($map->getRaw()['03043005']) ?? '';
+        $mapinfo['raw']['03043008'] = [
+            'login' => $map->getc8_authorLogin() ?? '',
+            'name' => $map->getc8_authorName() ?? '',
+            'zone' => $map->getc8_authorZone() ?? ''
+        ];
 
         $OMS = OnlineMapServices::get_new($mapinfo['uid']);
 
